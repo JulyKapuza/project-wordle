@@ -10,7 +10,7 @@ const GuessResult = ({ words, answer }) => {
   return (
     <div className="guess-results">
       {numRow.map((rowIndex) => (
-        <Guess value={words[rowIndex]} answer={answer} />
+        <Guess key={rowIndex} value={words[rowIndex]} answer={answer} />
       ))}
     </div>
   );
