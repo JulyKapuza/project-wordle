@@ -1,31 +1,17 @@
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 import { range } from "../../utils";
-import { checkGuess } from "../../game-helpers";
+
+
+import Guess from "../Guess";
 
 const GuessResult = ({ words, answer }) => {
-  const numRow = range(0, NUM_OF_GUESSES_ALLOWED, 1);
-  const numCol = range(0, 5, 1);
+  const numRow = range(NUM_OF_GUESSES_ALLOWED);
 
   return (
     <div className="guess-results">
-      {numRow.map((rowIndex) => {
-        const word = words?.[rowIndex] || "";
-        const status = checkGuess(answer, word);
-
-        return (
-          <p className="guess" key={rowIndex}>
-            {numCol.map((colIndex) => {
-              const statusStyle =
-                word?.length > 0 ? status[colIndex].status : "";
-              return (
-                <span className={`cell ${statusStyle}`} key={colIndex}>
-                  {word?.[colIndex] || ""}
-                </span>
-              );
-            })}
-          </p>
-        );
-      })}
+      {numRow.map((rowIndex) => (
+        <Guess value={words[rowIndex]} answer={answer} />
+      ))}
     </div>
   );
 };
